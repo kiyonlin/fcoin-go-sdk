@@ -21,20 +21,16 @@ func (c *Client) InitWS() error {
 	return nil
 }
 
-func (c *Client) WSPing() (WSPingRsp, error) {
-	var rsp WSPingRsp
+func (c *Client) WSPing() error {
 	args := WSArgs{
 		Cmd: "ping",
 	}
 	t := time.Now().Unix() * 1000
 	args.Args = append(args.Args, t)
 	if err := c.WS.WriteJSON(args); err != nil {
-		return rsp, err
+		return err
 	}
-	if err := c.WS.ReadJSON(&rsp); err != nil {
-		return rsp, err
-	}
-	return rsp, nil
+	return nil
 }
 
 func (c *Client) action(action, id string, topics ...string) error {
