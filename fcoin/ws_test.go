@@ -11,11 +11,10 @@ func TestWebsocket(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	rsp, err := api.WSPing()
+	err := api.WSPing()
 	if err != nil {
 		t.Fatal(err)
 	}
-	t.Logf("Ping from websocket: %v", rsp)
 
 	if err := api.WSSubscribe("some-test-id", "depth.L20.ethusdt"); err != nil {
 		t.Fatal(err)
