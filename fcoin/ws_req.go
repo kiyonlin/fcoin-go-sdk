@@ -33,7 +33,7 @@ func (c *Client) WSPing() error {
 	return nil
 }
 
-func (c *Client) action(action, id string, topics ...string) error {
+func (c *Client) action(action, id string, topics ...interface{}) error {
 	args := WSArgs{
 		Cmd: action,
 	}
@@ -51,16 +51,16 @@ func (c *Client) action(action, id string, topics ...string) error {
 }
 
 // Add new subscription
-func (c *Client) WSSubscribe(id string, topics ...string) error {
+func (c *Client) WSSubscribe(id string, topics ...interface{}) error {
 	return c.action("sub", id, topics...)
 }
 
 // Un-subscription
-func (c *Client) WSUnsubscribe(id string, topics ...string) error {
+func (c *Client) WSUnsubscribe(id string, topics ...interface{}) error {
 	return c.action("unsub", id, topics...)
 }
 
 // Request once
-func (c *Client) WSReq(id string, args ...string) error {
+func (c *Client) WSReq(id string, args ...interface{}) error {
 	return c.action("req", id, args...)
 }
