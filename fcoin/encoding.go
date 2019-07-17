@@ -7,6 +7,7 @@ import (
 	"net/url"
 	"reflect"
 	"strconv"
+	"strings"
 )
 
 // encode json marshal a struct into io.Reader
@@ -46,7 +47,10 @@ func structToMap(i interface{}) (values url.Values) {
 		case string:
 			v = f.String()
 		}
-		values.Set(typ.Field(i).Tag.Get("json"), v)
+		if v != "" {
+			jsonStr := typ.Field(i).Tag.Get("json")
+			values.Set(strings.Split(jsonStr, ",")[0], v)
+		}
 	}
 	return
 }
