@@ -11,9 +11,10 @@ func TestSign(t *testing.T) {
 	ts := "1523069544359"
 	args := "amount=100.0&price=100.0&side=buy&symbol=btcusdt&type=limit"
 	key := "3600d0a74aa3410fb3b1996cca2419c8"
-	output := Sign(method, uri, ts, args, key)
+	got := Sign(method, uri, ts, args, key)
 
-	if output != "DeP6oftldIrys06uq3B7Lkh3a0U=" {
-		t.Fatalf("output is wrong %v", output)
+	expected := "DeP6oftldIrys06uq3B7Lkh3a0U="
+	if got != expected {
+		t.Fatalf("expected %s and got %v", expected, got)
 	}
 }

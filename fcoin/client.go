@@ -3,11 +3,12 @@ package fcoin
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/gorilla/websocket"
 	"io/ioutil"
 	"net/http"
 	"strconv"
 	"time"
+
+	"github.com/gorilla/websocket"
 )
 
 type Client struct {
