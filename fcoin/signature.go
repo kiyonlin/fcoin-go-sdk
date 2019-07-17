@@ -11,6 +11,9 @@ import (
 func Sign(method, uri, ts, args, key string) string {
 	var prep string
 	if method == "GET" {
+		if args == "" {
+			prep = method + uri + ts
+		}
 		prep = method + uri + "?" + args + ts
 	} else {
 		prep = method + uri + ts + args
