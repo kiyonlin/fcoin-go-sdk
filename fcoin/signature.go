@@ -10,10 +10,7 @@ import (
 // args should be ordered URI format
 func Sign(method, uri, ts, args, key string) string {
 	var prep string
-	if method == "GET" {
-		if args == "" {
-			prep = method + uri + ts
-		}
+	if method == "GET" && args != "" {
 		prep = method + uri + "?" + args + ts
 	} else {
 		prep = method + uri + ts + args
