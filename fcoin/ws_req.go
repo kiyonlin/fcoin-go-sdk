@@ -1,8 +1,9 @@
 package fcoin
 
 import (
-	"github.com/gorilla/websocket"
 	"time"
+
+	"github.com/gorilla/websocket"
 )
 
 func (c *Client) InitWS() error {
@@ -63,4 +64,12 @@ func (c *Client) WSUnsubscribe(id string, topics ...interface{}) error {
 // Request once
 func (c *Client) WSReq(id string, args ...interface{}) error {
 	return c.action("req", id, args...)
+}
+
+func (c *Client) WSReadMessage() (messageType int, p []byte, err error) {
+	return c.WS.ReadMessage()
+}
+
+func (c *Client) WSClose() error {
+	return c.WS.Close()
 }
