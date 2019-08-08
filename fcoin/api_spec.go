@@ -68,11 +68,12 @@ type AccountsBalanceRsp struct {
 
 // Orders API
 type CreateOrderArgs struct {
-	Amount string `json:"amount"`
-	Price  string `json:"price"`
-	Type   string `json:"type"`
-	Side   string `json:"side"`
-	Symbol string `json:"symbol"`
+	Amount      string `json:"amount"`
+	Price       string `json:"price"`
+	Type        string `json:"type"`
+	Side        string `json:"side"`
+	Symbol      string `json:"symbol"`
+	AccountType string `json:"account_type,omitempty"`
 }
 
 type CreateOrderRsp struct {
