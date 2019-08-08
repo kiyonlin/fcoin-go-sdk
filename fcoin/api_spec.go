@@ -13,6 +13,9 @@ const (
 	// Account endpoints
 	GetBalance = "/accounts/balance"
 
+	// Margin Account endpoints
+	GetMarginBalance = "/broker/leveraged_accounts"
+
 	// Order endpoints
 	OrdersBase = "/orders"
 
@@ -66,6 +69,29 @@ type AccountsBalanceRsp struct {
 	Data []CurrencyBalance `json:"data"`
 }
 
+// MarginAccount API
+type MarginBalance struct {
+	Open                             bool   `json:"open"`                                 // 是否已经开通该类型杠杆账户. true:已开通;false:未开通
+	LeveragedAccountType             string `json:"leveraged_account_type"`               // 杠杆账户类型
+	Base                             string `json:"base"`                                 // 基准币种
+	Quote                            string `json:"quote"`                                // 计价币种
+	AvailableBaseCurrencyAmount      string `json:"available_base_currency_amount"`       // 可用的基准币种资产
+	FrozenBaseCurrencyAmount         string `json:"frozen_base_currency_amount"`          // 冻结的基准币种资产
+	AvailableQuoteCurrencyAmount     string `json:"available_quote_currency_amount"`      // 可用的计价币种资产
+	FrozenQuoteCurrencyAmount        string `json:"frozen_quote_currency_amount"`         // 冻结的计价币种资产
+	AvailableBaseCurrencyLoanAmount  string `json:"available_base_currency_loan_amount"`  // 可借的基准币种数量
+	AvailableQuoteCurrencyLoanAmount string `json:"available_quote_currency_loan_amount"` // 可借的计价币种数量
+	BlowUpPrice                      string `json:"blow_up_price"`                        // 爆仓价
+	RiskRate                         string `json:"risk_rate"`                            // 爆仓风险率
+	State                            string `json:"state"`                                // 账户状态. close 已关闭;open 已开通-未发生借贷;normal 已借贷-风险率正常;blow_up 已爆仓;overrun 已穿仓"
+}
+
+type MarginBalanceRsp struct {
+	Status string          `json:"status"`
+	Msg    string          `json:"msg"`
+	Data   []MarginBalance `json:"data"`
+}
+
 // Orders API
 type CreateOrderArgs struct {
 	Amount      string `json:"amount"`
@@ -83,11 +109,12 @@ type CreateOrderRsp struct {
 
 type GetOrdersArgs struct {
 	// after/before certain page
-	After  string `json:"After,omitempty"`
-	Before string `json:"before,omitempty"`
-	Limit  string `json:"limit,omitempty"`
-	States string `json:"states,omitempty"`
-	Symbol string `json:"symbol,omitempty"`
+	After       string `json:"After,omitempty"`
+	Before      string `json:"before,omitempty"`
+	Limit       string `json:"limit,omitempty"`
+	States      string `json:"states,omitempty"`
+	Symbol      string `json:"symbol,omitempty"`
+	AccountType string `json:"account_type,omitempty"`
 }
 
 type OrderDetail struct {

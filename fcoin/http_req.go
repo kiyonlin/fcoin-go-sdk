@@ -26,6 +26,13 @@ func (c *Client) AccountsBalance() (AccountsBalanceRsp, error) {
 	return rsp, err
 }
 
+// MarginAccount API call
+func (c *Client) MarginBalance() (MarginBalanceRsp, error) {
+	var rsp MarginBalanceRsp
+	err := c.request(GetMarginBalance, "GET", NeedSignature, nil, &rsp)
+	return rsp, err
+}
+
 // Order API call
 func (c *Client) CreateOrder(args *CreateOrderArgs) (CreateOrderRsp, error) {
 	var rsp CreateOrderRsp
