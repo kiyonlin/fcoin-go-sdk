@@ -71,5 +71,8 @@ func (c *Client) WSReadMessage() (messageType int, p []byte, err error) {
 }
 
 func (c *Client) WSClose() error {
-	return c.WS.Close()
+	if c.WS != nil {
+		return c.WS.Close()
+	}
+	return nil
 }
